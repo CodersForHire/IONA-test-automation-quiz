@@ -44,7 +44,7 @@ Automate scenarios that verify the application handles bad input gracefully. At 
 
 - **Invalid login**: Attempt to log in with incorrect credentials and assert the error alert message
 - **Empty checkout form**: Proceed to checkout without filling in any fields and assert that the expected validation or browser behavior is triggered
-- At least **one additional** negative scenario of your choice (e.g., adding no items before checkout, using an invalid card number format, etc.)
+- At least **three additional** negative scenarios of your choice (e.g., adding no items before checkout, using an invalid card number format, etc.)
 
 ---
 
