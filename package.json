@@ -1,15 +1,20 @@
 {
   "name": "test-automation-tutorial",
   "version": "1.0.0",
-  "description": "Cypress test automation tutorial for QA team training",
+  "description": "Cypress and Playwright test automation assessment for QA engineer candidates",
   "main": "index.js",
   "scripts": {
     "cy:open": "cypress open",
     "cy:run": "cypress run",
-    "cy:headed": "cypress run --headed"
+    "cy:headed": "cypress run --headed",
+    "pw:install": "playwright install",
+    "pw:open": "playwright test --ui",
+    "pw:run": "playwright test",
+    "pw:headed": "playwright test --headed"
   },
   "keywords": [
     "cypress",
+    "playwright",
     "test-automation",
     "e2e-testing",
     "typescript"
@@ -17,9 +22,10 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@playwright/test": "^1.53.0",
+    "@types/node": "^22.10.2",
     "cypress": "^15.9.0",
-    "typescript": "^5.9.3",
-    "@types/node": "^22.10.2"
+    "typescript": "^5.9.3"
   },
   "engines": {
     "node": ">=24.0.0",

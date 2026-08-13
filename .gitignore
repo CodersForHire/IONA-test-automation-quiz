@@ -7,6 +7,10 @@ cypress/videos/
 cypress/screenshots/
 cypress/downloads/
 
+# Playwright
+playwright-report/
+test-results/
+
 # OS files
 .DS_Store
 Thumbs.db

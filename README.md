@@ -1,6 +1,6 @@
-# Test Automation Tutorial
+# Test Automation Assessment
 
-Welcome to the Test Automation Tutorial repository! This repository is designed to help QA team members learn test automation using Cypress and TypeScript.
+Welcome to IONA! This repository is used to assess QA engineer candidates on their test automation skills. You may use either **Cypress** or **Playwright** — choose the framework you are most comfortable with. This is your time to shine, so make sure you are proud of what you submit before opening a pull request.
 
 ## Prerequisites
 
@@ -15,239 +15,181 @@ Before you begin, make sure you have the following installed:
   - Verify installation: `git --version`
 - **Basic understanding of TypeScript**: Optional, but helpful for better IDE support and type safety
 
+## Acceptance Criteria
+
+The following test scenarios are **required**. Your tests must cover all three flows against the [DemoBlaze](https://www.demoblaze.com/) website.
+
+### 1. Checkout Flow — Guest
+
+Automate the full purchase journey without being logged in:
+
+- Navigate to the homepage
+- Select a product from any category
+- Add the product to the cart
+- Proceed to checkout and fill in the purchase form (name, country, city, credit card, month, year)
+- Assert that the order success confirmation appears
+
+### 2. Checkout Flow — Logged In User
+
+Automate the full purchase journey as an authenticated user:
+
+- Log in with valid credentials
+- Select a product and add it to the cart
+- Proceed to checkout and complete the purchase form
+- Assert that the order success confirmation appears
+
+### 3. Negative / Invalid Test Cases
+
+Automate scenarios that verify the application handles bad input gracefully. At minimum, cover:
+
+- **Invalid login**: Attempt to log in with incorrect credentials and assert the error alert message
+- **Empty checkout form**: Proceed to checkout without filling in any fields and assert that the expected validation or browser behavior is triggered
+- At least **one additional** negative scenario of your choice (e.g., adding no items before checkout, using an invalid card number format, etc.)
+
+---
+
 ## Getting Started
 
-### 1. Download/Clone Repository
-
-Clone this repository to your local machine:
+### 1. Clone the Repository
 
 ```bash
 git clone <repository-url>
-cd test-automation-tutorial
+cd cypress-test-automation-quiz
 ```
 
 ### 2. Install Dependencies
-
-Install all required dependencies using npm:
 
 ```bash
 npm install
 ```
 
-This will install Cypress, TypeScript, and all other necessary packages.
+### 3. Create Your Branch
 
-### 3. Create Your Own Branch
-
-**Important**: Always work on your own branch to avoid conflicts with other team members.
-
-Create and switch to your own branch:
+**Important**: Always work on your own branch.
 
 ```bash
-git checkout -b your-name/feature-description
-```
-
-**Alternative method** (if you prefer separate commands):
-
-```bash
-git branch your-name/feature-description
-git checkout your-name/feature-description
+git checkout -b your-name/date
 ```
 
 **Branch Naming Convention**: Use your name followed by a brief description, for example:
-- `van/login-tests`
-- `joy/cart-functionality`
-- `hyra/product-search-tests`
+- `john-doe/checkout-flow`
 
-### 4. Create Your Test Folder
+---
 
-For better test case management, each team member should create their own folder under `cypress/e2e/`:
+## Cypress
 
-1. Navigate to the `cypress/e2e/` directory
-2. Create a folder with your name (e.g., `Van`, `Joy`, `Hyra`)
-3. Place all your test files inside your personal folder
+### Folder Structure
 
-**Example structure:**
+Create your own folder under `cypress/e2e/` using camelCase with your first and last name:
+
 ```
 cypress/
   └── e2e/
-      ├── Van/
-      │   └── e2e.cy.ts
-      ├── Joy/
-      │   └── login.cy.ts
-      └── Hyra/
-          └── cart.cy.ts
+      └── johnDoe/
+          └── checkout.cy.ts
 ```
 
-**Folder Naming Convention**: Use your first name or preferred identifier (e.g., `Van`, `Joy`, `Hyra`)
+### Running Cypress
 
-### 5. Running Tests
+| Command | Description |
+|---|---|
+| `npm run cy:open` | Open the interactive Cypress Test Runner |
+| `npm run cy:run` | Run all tests headlessly |
+| `npm run cy:headed` | Run tests with the browser visible |
 
-Once everything is set up, you can run tests in different modes:
+---
 
-**Open Cypress Test Runner** (Interactive mode - recommended for learning):
+## Playwright
+
+### Setup
+
+After installing dependencies, install the Playwright browser binaries:
+
 ```bash
-npm run cy:open
+npm run pw:install
 ```
 
-**Run tests headlessly** (Command line mode):
-```bash
-npm run cy:run
+### Folder Structure
+
+Create your own folder under `playwright/` using camelCase with your first and last name:
+
+```
+playwright/
+  └── johnDoe/
+      └── checkout.spec.ts
 ```
 
-**Run tests in headed mode** (Browser visible):
+### Running Playwright
+
+| Command | Description |
+|---|---|
+| `npm run pw:open` | Open the interactive Playwright UI mode |
+| `npm run pw:run` | Run all tests headlessly |
+| `npm run pw:headed` | Run tests with the browser visible |
+
+---
+
+## Test Website
+
+This assessment uses **[DemoBlaze](https://www.demoblaze.com/)** as the target application.
+
+DemoBlaze is a demo e-commerce website that includes:
+
+- **Product Catalog**: Phones, Laptops, and Monitors
+- **Shopping Cart**: Add and remove products
+- **User Authentication**: Sign up and login
+- **Checkout**: Purchase form with order confirmation
+
+---
+
+## Committing and Pushing
+
 ```bash
-npm run cy:headed
-```
-
-## Working with Your Branch
-
-### Committing Changes
-
-After making changes to your test files, commit them to your branch:
-
-```bash
-# Stage all changes
+# Stage your changes
 git add .
 
 # Commit with a descriptive message
-git commit -m "Add login test for DemoBlaze"
+git commit -m "Add checkout flow tests."
+
+# Push your branch
+git push origin your-branch-name
 ```
 
 **Commit Message Best Practices**:
 - Use clear, descriptive messages
-- Start with a verb (Add, Fix, Update, Remove)
+- Start with a verb: Add, Fix, Update, Remove
 - Keep messages concise but informative
 
-### Pushing to Your Branch
-
-Push your changes to the remote repository:
-
-```bash
-git push origin your-branch-name
-```
-
-**Example:**
-```bash
-git push origin van/login-tests
-```
-
-### Creating a Pull Request
-
-After pushing your changes, you can create a pull request on GitHub/GitLab to:
-- Share your work with the team
-- Get code reviews
-- Merge your changes to the main branch (if approved)
-
-## Test Website
-
-This tutorial uses **[DemoBlaze](https://www.demoblaze.com/)** as the test application.
-
-### About DemoBlaze
-
-DemoBlaze is a demo e-commerce website designed for testing purposes. It includes:
-
-- **Product Catalog**: Phones, Laptops, and Monitors
-- **Shopping Cart**: Add/remove products
-- **User Authentication**: Sign up and login functionality
-- **Contact Form**: Submit messages
-- **Product Details**: View individual product information
-
-### What You Can Practice
-
-- **Navigation Testing**: Test menu links and page navigation
-- **Form Testing**: Test login, signup, and contact forms
-- **Product Testing**: Browse products, view details, add to cart
-- **Cart Functionality**: Add/remove items, checkout process
-- **UI Element Verification**: Verify elements are visible, clickable, etc.
-- **API Testing**: Test backend interactions (if applicable)
+---
 
 ## Project Structure
 
 ```
-test-automation-tutorial/
-├── README.md                    # This file
-├── package.json                 # Dependencies and npm scripts
-├── tsconfig.json                # TypeScript configuration
-├── .gitignore                   # Git ignore patterns
-├── cypress.config.ts            # Cypress configuration
+cypress-test-automation-quiz/
+├── README.md
+├── package.json
+├── tsconfig.json                    # TypeScript config for Cypress
+├── cypress.config.ts                # Cypress configuration
+├── playwright.config.ts             # Playwright configuration
 ├── cypress/
-│   ├── e2e/                     # End-to-end test files
-│   │   ├── Van/                 # Team member folder (example)
-│   │   │   └── e2e.cy.ts        # Example test file
-│   │   └── [YourName]/          # Your folder goes here
-│   ├── fixtures/                # Test data fixtures
-│   │   └── example.json         # Example fixture data
-│   ├── support/                 # Support files
-│   │   ├── commands.ts          # Custom Cypress commands
-│   │   └── e2e.ts               # Global test configuration
-│   └── downloads/              # Downloaded files (gitignored)
+│   ├── e2e/
+│   │   └── [yourName]/              # Your Cypress test folder
+│   │       └── checkout.cy.ts
+│   ├── fixtures/
+│   │   └── example.json
+│   └── support/
+│       ├── commands.ts
+│       └── e2e.ts
+├── playwright/
+│   ├── tsconfig.json                # TypeScript config for Playwright
+│   └── [yourName]/                  # Your Playwright test folder
+│       └── checkout.spec.ts
+└── .github/
+    └── workflows/
+        ├── cypress-tests.yml
+        └── playwright-tests.yml
 ```
-
-## Writing Your First Test
-
-Here's a simple example to get you started. Create a file in your folder (e.g., `cypress/e2e/YourName/my-first-test.cy.ts`):
-
-```typescript
-describe('My First Test', () => {
-  it('should visit the homepage', () => {
-    cy.visit('/');
-    cy.title().should('include', 'STORE');
-  });
-});
-```
-
-### Key Cypress Commands
-
-- `cy.visit(url)` - Navigate to a page
-- `cy.get(selector)` - Find an element
-- `cy.contains(text)` - Find element containing text
-- `cy.click()` - Click an element
-- `cy.type(text)` - Type into an input field
-- `cy.should(assertion)` - Make an assertion
-- `cy.fixture(file)` - Load test data from fixtures
-
-## Best Practices
-
-1. **Organize Your Tests**: Keep related tests in the same file
-2. **Use Descriptive Names**: Test names should clearly describe what they test
-3. **Keep Tests Independent**: Each test should be able to run on its own
-4. **Use Fixtures**: Store test data in fixture files for reusability
-5. **Follow Page Object Model**: Consider organizing selectors and actions (advanced)
-6. **Write Clear Assertions**: Make sure your assertions are meaningful
-7. **Commit Frequently**: Commit your work often with clear messages
-8. **Stay in Your Branch**: Never commit directly to main/master branch
-
-## Resources and Learning Materials
-
-- [Cypress Documentation](https://docs.cypress.io/)
-- [Cypress Best Practices](https://docs.cypress.io/guides/references/best-practices)
-- [TypeScript Handbook](https://www.typescriptlang.org/docs/)
-- [DemoBlaze Website](https://www.demoblaze.com/)
-
-## Troubleshooting
-
-### Cypress won't open
-- Make sure all dependencies are installed: `npm install`
-- Check Node.js version: `node --version` (should be 24.x or higher)
-
-### Tests are failing
-- Verify the base URL in `cypress.config.ts`
-- Check that DemoBlaze website is accessible
-- Review test selectors - they may have changed
-
-### TypeScript errors
-- Ensure TypeScript is installed: `npm list typescript`
-- Check `tsconfig.json` configuration
-- Restart your IDE/editor
-
-## Need Help?
-
-If you encounter any issues or have questions:
-1. Check the Cypress documentation
-2. Review example tests in the `Van/` folder
-3. Ask your team members
-4. Check existing issues in the repository
 
 ---
 
-Happy Testing! 🚀
+Happy Testing!
