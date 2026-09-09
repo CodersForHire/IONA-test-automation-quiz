@@ -1,0 +1,47 @@
+{
+  "_comment": [
+    "'baseline' lists the axe rule ids that fire on the page today, each with the",
+    "reason it is tolerated. The spec asserts the found set EQUALS the baseline, so",
+    "a NEW violation fails the test and a violation that has been FIXED also fails",
+    "it -- which forces the entry to be deleted rather than left to accumulate.",
+    "Regenerate with: npm run test:a11y -- --project=chromium",
+    "A case is reached EITHER by 'path' -- a standing URL -- OR by 'category' and",
+    "'product', which the spec opens through the catalogue. The product page takes",
+    "the second form: /prod.html?idp_=<id> names a product by database key, which",
+    "is not stable across environments."
+  ],
+  "wcagTags": ["wcag2a", "wcag2aa"],
+  "cases": [
+    {
+      "title": "the homepage",
+      "tags": ["@a11y", "@regression"],
+      "path": "/index.html",
+      "ready": "CATEGORIES",
+      "baseline": {
+        "image-alt": "2 nodes. Carousel and product-card images ship with no alternative text. Pre-existing on the public demo."
+      }
+    },
+    {
+      "title": "a product page",
+      "tags": ["@a11y", "@regression"],
+      "category": "Phones",
+      "product": "Samsung galaxy s6",
+      "ready": "Add to cart",
+      "baseline": {
+        "color-contrast": "1 node. Muted text does not reach the 4.5:1 contrast minimum.",
+        "image-alt": "2 nodes. Product imagery ships with no alternative text.",
+        "link-name": "2 nodes. The carousel's previous/next controls are icon-only links with no discernible name."
+      }
+    },
+    {
+      "title": "the cart",
+      "tags": ["@a11y", "@regression"],
+      "path": "/cart.html",
+      "ready": "Products",
+      "baseline": {
+        "color-contrast": "1 node. Muted text does not reach the 4.5:1 contrast minimum.",
+        "image-alt": "2 nodes. Brand and cart imagery ship with no alternative text."
+      }
+    }
+  ]
+}

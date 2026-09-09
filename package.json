@@ -10,7 +10,19 @@
     "pw:install": "playwright install",
     "pw:open": "playwright test --ui",
     "pw:run": "playwright test",
-    "pw:headed": "playwright test --headed"
+    "pw:headed": "playwright test --headed",
+    "test:dev": "cross-env TEST_ENV=dev playwright test",
+    "test:test": "cross-env TEST_ENV=test playwright test",
+    "test:staging": "cross-env TEST_ENV=staging playwright test",
+    "test:smoke": "playwright test playwright/ronelgeronimo/tests --grep @smoke",
+    "test:e2e": "playwright test playwright/ronelgeronimo/tests/e2e",
+    "test:regression": "playwright test playwright/ronelgeronimo/tests",
+    "test:regression-only": "playwright test playwright/ronelgeronimo/tests/regression",
+    "test:a11y": "playwright test --grep @a11y",
+    "test:all-browsers": "playwright test --project=chromium --project=firefox --project=webkit",
+    "test:docker": "bash playwright/ronelgeronimo/scripts/run-in-docker.sh",
+    "test:report": "playwright show-report",
+    "typecheck": "tsc --noEmit -p playwright/tsconfig.json"
   },
   "keywords": [
     "cypress",
@@ -21,10 +33,19 @@
   ],
   "author": "",
   "license": "ISC",
+  "comments": {
+    "overrides": "@axe-core/playwright takes playwright-core as a peer with a range so wide (>= 1.0.0) that npm installs its own newer copy alongside ours. Two playwright-core versions means two structurally different Page types, and passing the suite's Page to AxeBuilder stops compiling. Pinning the peer to the version @playwright/test uses keeps one copy in the tree."
+  },
+  "overrides": {
+    "playwright-core": "1.53.2"
+  },
   "devDependencies": {
-    "@playwright/test": "^1.53.0",
+    "@axe-core/playwright": "^4.13.0",
+    "@playwright/test": "1.53.2",
     "@types/node": "^22.10.2",
+    "cross-env": "^10.1.0",
     "cypress": "^15.9.0",
+    "dotenv": "^17.4.2",
     "typescript": "^5.9.3"
   },
   "engines": {
