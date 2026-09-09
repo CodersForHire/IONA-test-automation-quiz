@@ -1,0 +1,79 @@
+{
+  "_comment": [
+    "Three cart journeys. Unlike the other data files these are NOT rows of one",
+    "shape: each has its own basket and its own ending, so each is a named object",
+    "loaded with loadCase() rather than a row loaded with loadCases().",
+    "",
+    "Each journey is a single test rather than a row run many times, so its title",
+    "and tags are written at the test() call in the spec, not here. This file holds",
+    "only the values the journey acts on.",
+    "",
+    "'removeThenBuyLaptop.remove' holds titles taken from its own 'add' list. What",
+    "survives is derived by the spec, so the data cannot claim to keep something it",
+    "also removed.",
+    "",
+    "'emptiedThenOrder' asks for three monitors and DemoBlaze sells only two, so",
+    "'ASUS Full HD' is listed twice. That duplicate is deliberate: it is what makes",
+    "the basket six items, and it is why the cart is emptied by row index rather",
+    "than by title (see CartPage.emptyCart).",
+    "",
+    "Titles are chosen so none is a substring of another — cart rows are matched by",
+    "text, so 'Sony vaio i5' beside 'Sony vaio i7' would be ambiguous.",
+    "",
+    "Expiry dates are tokens expanded at run time by utils/dates.ts, so",
+    "'{{year+2}}' is always a card that has not expired."
+  ],
+
+  "buyPhone": {
+    "purchase": { "category": "Phones", "product": "Nokia lumia 1520" },
+    "details": {
+      "name": "Ronel Geronimo",
+      "country": "Philippines",
+      "city": "Manila",
+      "card": "4111111111111111",
+      "month": "{{month}}",
+      "year": "{{year+2}}"
+    }
+  },
+
+  "removeThenBuyLaptop": {
+    "add": [
+      { "category": "Phones", "product": "Iphone 6 32gb" },
+      { "category": "Laptops", "product": "MacBook air" },
+      { "category": "Laptops", "product": "Dell i7 8gb" }
+    ],
+    "remove": ["Iphone 6 32gb", "MacBook air"],
+    "details": {
+      "name": "Maria Santos",
+      "country": "Netherlands",
+      "city": "Amsterdam",
+      "card": "5555555555554444",
+      "month": "{{month+1}}",
+      "year": "{{year+4}}"
+    }
+  },
+
+  "emptiedThenOrder": {
+    "add": [
+      { "category": "Phones", "product": "Samsung galaxy s7" },
+      { "category": "Laptops", "product": "Sony vaio i5" },
+      { "category": "Laptops", "product": "2017 Dell 15.6 Inch" },
+      { "category": "Monitors", "product": "Apple monitor 24" },
+      { "category": "Monitors", "product": "ASUS Full HD" },
+      { "category": "Monitors", "product": "ASUS Full HD" }
+    ],
+    "details": {
+      "name": "Jan de Vries",
+      "country": "Netherlands",
+      "city": "Utrecht",
+      "card": "378282246310005",
+      "month": "{{month+2}}",
+      "year": "{{year+3}}"
+    },
+    "outcome": {
+      "kind": "purchaseAccepted",
+      "defect": "DB-002",
+      "shouldHaveBeen": "Place Order should be unavailable, or the order refused, when the cart holds no items. Emptying a filled cart reaches the same defect as never filling one: the basket is verified to hold six items and then verified to hold none, and the order is still taken."
+    }
+  }
+}

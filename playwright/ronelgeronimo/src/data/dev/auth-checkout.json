@@ -1,0 +1,36 @@
+{
+  "_comment": [
+    "Expiry dates are tokens expanded at run time by utils/dates.ts, so the",
+    "cards here never quietly expire. See data/guest-checkout.json."
+  ],
+  "cases": [
+    {
+      "title": "buys a phone and sees the order confirmation",
+      "tags": ["@smoke", "@regression"],
+      "category": "Phones",
+      "product": "Iphone 6 32gb",
+      "details": {
+        "name": "Ronel Geronimo",
+        "country": "Philippines",
+        "city": "Quezon City",
+        "card": "4111111111111111",
+        "month": "{{month}}",
+        "year": "{{year+2}}"
+      }
+    },
+    {
+      "title": "buys a laptop and sees the order confirmation",
+      "tags": ["@regression"],
+      "category": "Laptops",
+      "product": "MacBook Pro",
+      "details": {
+        "name": "Ronel Geronimo",
+        "country": "Philippines",
+        "city": "Quezon City",
+        "card": "5555555555554444",
+        "month": "{{month+6}}",
+        "year": "{{year+5}}"
+      }
+    }
+  ]
+}

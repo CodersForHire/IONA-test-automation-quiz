@@ -1,0 +1,23 @@
+{
+  "dev": {
+    "baseURL": "https://www.demoblaze.com",
+    "retries": 0,
+    "actionTimeout": 15000,
+    "navigationTimeout": 30000,
+    "expectTimeout": 15000
+  },
+  "test": {
+    "baseURL": "https://www.demoblaze.com",
+    "retries": 1,
+    "actionTimeout": 15000,
+    "navigationTimeout": 30000,
+    "expectTimeout": 15000
+  },
+  "staging": {
+    "baseURL": "https://www.demoblaze.com",
+    "retries": 2,
+    "actionTimeout": 20000,
+    "navigationTimeout": 30000,
+    "expectTimeout": 20000
+  }
+}

@@ -1,0 +1,52 @@
+{
+  "_comment": [
+    "Expiry dates are written as tokens and expanded at run time by",
+    "utils/dates.ts, so '{{year+2}}' is always a card that has not expired.",
+    "A literal year would be a valid future date today and a silently expired",
+    "one in a few years' time."
+  ],
+  "cases": [
+    {
+      "title": "buys a phone and sees the order confirmation",
+      "tags": ["@smoke", "@regression"],
+      "category": "Phones",
+      "product": "Samsung galaxy s6",
+      "details": {
+        "name": "Ronel Geronimo",
+        "country": "Philippines",
+        "city": "Manila",
+        "card": "4111111111111111",
+        "month": "{{month}}",
+        "year": "{{year+2}}"
+      }
+    },
+    {
+      "title": "buys a laptop and sees the order confirmation",
+      "tags": ["@regression"],
+      "category": "Laptops",
+      "product": "MacBook air",
+      "details": {
+        "name": "Maria Santos",
+        "country": "Netherlands",
+        "city": "Amsterdam",
+        "card": "5555555555554444",
+        "month": "{{month+1}}",
+        "year": "{{year+4}}"
+      }
+    },
+    {
+      "title": "buys a monitor and sees the order confirmation",
+      "tags": ["@regression"],
+      "category": "Monitors",
+      "product": "ASUS Full HD",
+      "details": {
+        "name": "Jan de Vries",
+        "country": "Netherlands",
+        "city": "Utrecht",
+        "card": "378282246310005",
+        "month": "{{month+2}}",
+        "year": "{{year+3}}"
+      }
+    }
+  ]
+}

@@ -1,0 +1,115 @@
+{
+  "_comment": [
+    "outcome.kind 'alert'            -> DemoBlaze correctly refuses the order.",
+    "outcome.kind 'purchaseAccepted' -> DemoBlaze takes the order when it should not.",
+    "The second kind records a real product defect. The assertion matches what the",
+    "application actually does, so the suite stays green for a bug it did not cause,",
+    "while the defect id keeps it visible. See the defect log in README.md.",
+    "Expiry dates are tokens expanded at run time by utils/dates.ts. '{{year-5}}'",
+    "keeps the malformed-card row meaning 'an expiry year in the past' forever,",
+    "which a literal 1999 would eventually stop demonstrating clearly."
+  ],
+  "cases": [
+    {
+      "title": "refuses an order when the checkout form is empty",
+      "tags": [
+        "@smoke",
+        "@regression"
+      ],
+      "addProduct": true,
+      "details": {},
+      "outcome": {
+        "kind": "alert",
+        "message": "Please fill out Name and Creditcard."
+      }
+    },
+    {
+      "title": "refuses an order with a name but no credit card",
+      "tags": [
+        "@regression"
+      ],
+      "addProduct": true,
+      "details": {
+        "name": "Ronel Geronimo",
+        "country": "Philippines",
+        "city": "Manila"
+      },
+      "outcome": {
+        "kind": "alert",
+        "message": "Please fill out Name and Creditcard."
+      }
+    },
+    {
+      "title": "refuses an order with a credit card but no name",
+      "tags": [
+        "@regression"
+      ],
+      "addProduct": true,
+      "details": {
+        "card": "4111111111111111",
+        "month": "{{month}}",
+        "year": "{{year+2}}"
+      },
+      "outcome": {
+        "kind": "alert",
+        "message": "Please fill out Name and Creditcard."
+      }
+    },
+    {
+      "title": "accepts a malformed credit card, expiry month and expiry year",
+      "tags": [
+        "@regression"
+      ],
+      "addProduct": true,
+      "details": {
+        "name": "Ronel Geronimo",
+        "country": "Philippines",
+        "city": "Manila",
+        "card": "not-a-card-!!",
+        "month": "13",
+        "year": "{{year-5}}"
+      },
+      "outcome": {
+        "kind": "purchaseAccepted",
+        "defect": "DB-001",
+        "shouldHaveBeen": "The order should be refused: the card is not numeric, month 13 does not exist and the expiry year is five years in the past. purchaseOrder() checks only that name and card are non-empty."
+      }
+    },
+    {
+      "title": "accepts an order placed with an empty cart",
+      "tags": [
+        "@regression"
+      ],
+      "addProduct": false,
+      "details": {
+        "name": "Ronel Geronimo",
+        "country": "Philippines",
+        "city": "Manila",
+        "card": "4111111111111111",
+        "month": "{{month}}",
+        "year": "{{year+2}}"
+      },
+      "outcome": {
+        "kind": "purchaseAccepted",
+        "defect": "DB-002",
+        "shouldHaveBeen": "Place Order should be unavailable, or the order refused, when the cart holds no items."
+      }
+    },
+    {
+      "title": "accepts an order with no address and no expiry date",
+      "tags": [
+        "@regression"
+      ],
+      "addProduct": true,
+      "details": {
+        "name": "Ronel Geronimo",
+        "card": "4111111111111111"
+      },
+      "outcome": {
+        "kind": "purchaseAccepted",
+        "defect": "DB-008",
+        "shouldHaveBeen": "The order should be refused, or the expiry date at least required: country, city, month and year were all left blank and the order was still taken. purchaseOrder() validates name and card only, so the other four fields are decorative -- an order is accepted with nowhere to ship it and no expiry to authorise the card against."
+      }
+    }
+  ]
+}

@@ -30,8 +30,14 @@ yarn-error.log*
 
 # Environment variables
 .env
+.env.*
+!.env.example
 .env.local
 .env.*.local
+
+# Saved authentication state. This is a credential file: it grants exactly what a
+# stolen session cookie grants. Never commit it.
+.auth/
 
 # Build outputs
 dist/

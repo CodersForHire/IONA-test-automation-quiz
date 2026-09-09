@@ -1,0 +1,39 @@
+{
+  "_comment": [
+    "Rows with literal credentials only. '{{unknownUser}}' is replaced at run time",
+    "with a freshly generated name that cannot exist, so no row depends on the",
+    "state of a shared account.",
+    "The duplicate sign-up case needs an account that really exists, so it",
+    "registers its own throwaway user and lives in the spec, not here."
+  ],
+  "cases": [
+    {
+      "title": "rejects a username that does not exist",
+      "tags": ["@smoke", "@regression"],
+      "username": "{{unknownUser}}",
+      "password": "Nu11-and-void!",
+      "expectedAlert": "User does not exist."
+    },
+    {
+      "title": "rejects an empty username and password",
+      "tags": ["@regression"],
+      "username": "",
+      "password": "",
+      "expectedAlert": "Please fill out Username and Password."
+    },
+    {
+      "title": "rejects a username with no password",
+      "tags": ["@regression"],
+      "username": "{{unknownUser}}",
+      "password": "",
+      "expectedAlert": "Please fill out Username and Password."
+    },
+    {
+      "title": "rejects a password with no username",
+      "tags": ["@regression"],
+      "username": "",
+      "password": "Nu11-and-void!",
+      "expectedAlert": "Please fill out Username and Password."
+    }
+  ]
+}
