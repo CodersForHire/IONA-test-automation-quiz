@@ -1,31 +1,65 @@
 /// <reference types="cypress" />
 
-// ***********************************************
-// This example commands.ts shows you how to
-// create various custom commands and overwrite
-// existing commands.
-//
-// For more comprehensive examples of custom
-// commands please read more here:
-// https://on.cypress.io/custom-commands
-// ***********************************************
+import { loginPage } from './pages/loginPage'
 
 declare global {
-  namespace Cypress {
-    interface Chainable {
-      // Add your custom command types here
-      // Example:
-      // login(email: string, password: string): Chainable<void>
+    namespace Cypress {
+        interface Chainable {
+            /**
+             * Logs in to DemoBlaze using valid credentials.
+             */
+            login(
+                username: string,
+                password: string
+            ): Chainable<void>
+
+            /**
+             * Types into a DemoBlaze input using a controlled delay
+             * and verifies the final value.
+             */
+            typeSlowly(
+                selector: string,
+                value: string,
+                options?: {
+                    log?: boolean
+                }
+            ): Chainable<JQuery>
+        }
     }
-  }
 }
 
-// Example custom command (commented out - uncomment and modify as needed)
-// Cypress.Commands.add('login', (email: string, password: string) => {
-//   cy.visit('/login')
-//   cy.get('[data-cy=email]').type(email)
-//   cy.get('[data-cy=password]').type(password)
-//   cy.get('[data-cy=submit]').click()
-// })
+Cypress.Commands.add(
+    'typeSlowly',
+    (
+        selector: string,
+        value: string,
+        options: { log?: boolean } = {}
+    ) => {
+        cy.get(selector)
+            .should('be.visible')
+            .and('not.be.disabled')
+            .clear()
+            .should('have.value', '')
 
-export {};
+        for (const character of value) {
+            cy.get(selector)
+                .should('be.visible')
+                .type(character, {
+                    delay: 50,
+                    log: options.log ?? true
+                })
+        }
+
+        return cy.get(selector)
+            .should('have.value', value)
+    }
+)
+
+Cypress.Commands.add(
+    'login',
+    (username: string, password: string) => {
+        loginPage.login(username, password)
+    }
+)
+
+export {}

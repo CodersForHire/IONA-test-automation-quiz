@@ -6,6 +6,7 @@ yarn.lock
 cypress/videos/
 cypress/screenshots/
 cypress/downloads/
+cypress/reports/
 
 # Playwright
 playwright-report/
@@ -32,6 +33,7 @@ yarn-error.log*
 .env
 .env.local
 .env.*.local
+cypress.env.json
 
 # Build outputs
 dist/

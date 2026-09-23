@@ -4,9 +4,14 @@
   "description": "Cypress and Playwright test automation assessment for QA engineer candidates",
   "main": "index.js",
   "scripts": {
-    "cy:open": "cypress open",
-    "cy:run": "cypress run",
-    "cy:headed": "cypress run --headed",
+    "cy:open": "cypress open --browser chrome",
+    "cy:run": "cypress run --browser chrome",
+    "cy:headed": "cypress run --browser chrome --headed",
+    "test:smoke": "cypress run --browser chrome --expose grepTags=\"@smoke\"",
+    "test:regression": "cypress run --browser chrome --expose grepTags=\"@regression\"",
+    "test:negative": "cypress run --browser chrome --expose grepTags=\"@negative\"",
+    "test:checkout": "cypress run --browser chrome --expose grepTags=\"@checkout\"",
+    "test:authentication": "cypress run --browser chrome --expose grepTags=\"@authentication\"",
     "pw:install": "playwright install",
     "pw:open": "playwright test --ui",
     "pw:run": "playwright test",
@@ -22,9 +27,11 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@cypress/grep": "^7.0.0",
     "@playwright/test": "^1.53.0",
     "@types/node": "^22.10.2",
     "cypress": "^15.9.0",
+    "cypress-mochawesome-reporter": "^5.0.0",
     "typescript": "^5.9.3"
   },
   "engines": {

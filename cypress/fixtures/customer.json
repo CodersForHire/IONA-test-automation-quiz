@@ -1,0 +1,10 @@
+{
+  "validCustomer": {
+    "name": "Mike Beron",
+    "country": "Philippines",
+    "city": "Calamba",
+    "card": "4111111111111111",
+    "month": "09",
+    "year": "2028"
+  }
+}
